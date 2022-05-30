@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+    backend:
+        container_name: fastapi-backend
+        build: ./services/backend
+        ports: 
+            - 5000:5000
+        environment:
+            - DB_URL=mongodb://db/
+        volumes:
+            - ./services/backend:/app
+        command: uvicorn main.main:app --reload --host 0.0.0.0 --port 5000
+        depends_on:
+          - db
+    frontend:
+        container_name: quasar-frontend
+        build: ./services/frontend
+        ports: 
+            - 3000:3000
+    db:
+        container_name: mongoDB
+        image: mongo
+        ports:
+            - 27017:27017
+        volumes:
+            - mongodb_data:/data/db
+volumes:
+    mongodb_data:

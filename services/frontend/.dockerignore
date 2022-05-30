@@ -1,0 +1,8 @@
+venv
+.git
+.gitignore
+Dockerfile
+docker-compose.yaml
+node_modules
+dist
+.env.*.js
